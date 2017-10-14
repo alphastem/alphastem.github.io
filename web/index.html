@@ -12,7 +12,10 @@
           color: white;
         }
 
-        table, th, tr, td {
+        h4 {
+          text-indent: 20px;
+        }
+        table, th, tr, td ,th {
           border: 1px solid black;
         }
 
@@ -43,19 +46,24 @@
     <p> <strong> Weekly Plan</strong><p>
 
       <table>
+        <thead>
+          <tr>
+            <th>Week</th><th>Topic</th><th>Assignment/Project/Quiz</th>
+          </tr>
+        </thead>
         <tbody>
           <tr><td>Week 1</td><td>Intro to HTML. </td><td><a href="hw1.html">Assignment 1</a></td></tr>  
           <tr><td>Week 2</td><td>Intro to CSS</td><td><a href="quiz1.html">Quiz 1</a> <a href="hw2.html">Assignment 2</a></td></tr>
           <tr><td>Week 3</td><td>HTML: Link, Table and Comments.</td><td><a href="quiz2.html">Quiz 2</a>, <a href="hw3.html">Assignment 3</a></td></tr>
           <tr><td>Week 4</td><td>CSS: Text Properties</td><td>Recipe Book Project Demo, <a href="hw4.html">Assignment 4</a></td></tr>
-          <tr><td>Week 5</td><td>Web development tools: Chrome, Editor, Debugger etc.</td><td></td></tr>
-          <tr><td>Week 6</td><td>Intro to Github</td><td></td></tr>
-          <tr><td>Week 7</td><td>CSS: Layout </td><td></td></tr>
-          <tr><td>Week 8</td><td>CSS: More selectors</td><td></td></tr>
+          <tr><td>Week 5</td><td><a href="#tools">Web development tools: Chrome, Editor, Debugger etc.</a></td><td>Blog project demo</td></tr>
+          <tr><td>Week 6</td><td>CSS: Layout </td><td></td></tr>
+          <tr><td>Week 7</td><td>CSS: More selectors</td><td></td></tr>
           <tr><td>TBD</td><td></td><td></td></tr>
           <tr><td>TBD</td><td></td><td></td></tr>
           <tr><td>TBD</td><td></td><td></td></tr>
           <tr><td>TBD</td><td></td><td></td></tr>
+          <tr><td>TBD</td><td>Intro to Github</td><td></td></tr>
 
         </tbody>
       </table>
@@ -95,11 +103,26 @@ class code: <strong>GJ33Q4</strong>. </li>
         <li><a href="https://studio.code.org/p/weblab" target="_blank">Code.Org Web Lab</a></li>
     </ul>
 
-    <h3>Tools and References</h3>
+    <h3 id="tools">Tools and References</h3>
+    <h4>Online Editor</h4>
       <ul>
-        <li>Online Editor: Cloud9.io, nitrous.io, and Koding.com</li>
-        <li>Desktop Editor: Sublime, Atom</li>
+        <li><a href="https://www.w3schools.com/html/tryit.asp?filename=tryhtml_default" target="_blank">W3Schools's tryit</a></li>
+         <li><a href="https://studio.code.org/p/weblab" target="_blank">Code.Org Web Lab</a></li>
+         <li>Cloud9.io</li>
+      </ul>
+    <h4>Desktop Editor</h4>
+      <ul>
+        <li>Sublime Text</li>
+        <li>Atom</li>
+      </ul>
+    <h4>Debugging</h4>
+      <ul>
+        <li><a href="" target="_blank">Chrome Developer Tool</a></li>
         <li><a href="https://www.w3schools.com/colors/colors_picker.asp" target="_blank">Color Picker</a></li>
+      </ul>
+
+    <h4>Quick Reference and Books</h4>
+      <ul>
         <li><a href="http://htmlcheatsheet.com/" target="_blank">HTML Cheatsheet</a></li>
         <li><a href="https://www.nostarch.com/javascriptforkids">Book: JavaScript for Kids</a></li>
       </ul>
