@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css" type="text/css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.6.6/processing.js"></script>
+   	<script>
+		function populatePre(url) {
+		    var xhr = new XMLHttpRequest();
+		    xhr.onload = function () {
+		        document.getElementById('code').textContent = this.responseText;
+		    };
+		    xhr.open('GET', url);
+		    xhr.send();
+		}
+		populatePre('fish.js');   	
+
+   	</script>
+  </head>
+  <body>
+    <h1>Fish Tank</h1>
+    <canvas data-processing-sources="fish.js"></canvas>
+
+	<pre id="code"></pre>
+
+  </body>
+</html>

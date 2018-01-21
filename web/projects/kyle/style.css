@@ -1,0 +1,21 @@
+body {
+  background: white;
+}
+p {
+  color: black;
+}
+h1 {
+  font-weight: bold;
+}
+
+canvas {
+  border-width: 3px;
+  border-color:red;
+  border-style: dashed;
+}
+
+pre {
+	border-width: 3px;
+	border-color:blue;
+	border-style:dashed;
+}
