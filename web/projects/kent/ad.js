@@ -1,43 +1,34 @@
 size(400,400);
 
-
-var xPos = 200;
-
 noStroke();
 fill(255, 0, 0);
-background(0, 26, 255);
 
+var omgpizza = 30;
 
-// head
-ellipse(xPos, xPos, 60, 60);
-fill(255, 0, 0);
-// bodyz
-ellipse(xPos, 250, 90, 90);
-fill(0, 0, 0);
-// eyes
-ellipse(210, 192, 10, 10);
-ellipse(190, 192, 10, 10);
-fill(255, 247, 0);
-// mouth
-ellipse(xPos, 214, 20, 20);
-fill(255, 0, 0);
+textSize(omgpizza);
+text("Ledo's Pizza!", 10, 30);
+textSize(44);
+fill(42, 232, 83);
+text("Bestselling pizza!", 10, 87);
+fill(111, 255, 0);
+text("4.97/5 Stars", 10 ,187 );
+textSize(22);
+fill(132, 140, 56);
+text("Voted 2017 Best Pizza!", 10, 267);
+textSize(10);
 
-// ears
-ellipse(221, 174, 30, 30);
-ellipse(181, 174, 30, 30);
-textSize(30);
-// ground
-fill(0, 255, 13);
-rect(1, 303, 400, 100);
+text("The only square pizza, because we never cut", 80, 195);
+text("corners!", 80, 205);
 
-// sun
-fill(255, 238, 0);
-ellipse(200, 28, 75, 75);
-
-// text
-fill(255, 0, 0);
-text("TUFFED INSTON!", 10, 30);
-textSize(15);
-text("SO SOFT! DON'T GO TO SLEEP WITHOUT ONE!", 10, 87);
-text("COMES IN DIFFERENT COLORS!!!!!!", 10, 100);
-text("DOES NOT HAVE TO BE CALLED INSTON OR WINSTON", 10, 113);
+fill(237, 230, 26);//pizza
+rect(200,300,75,130,167);
+fill(122, 89, 75);//crust
+rect(200,390,75,10,8923819);
+fill(84, 23, 23);
+rect(250,325,15,15,15);//pepperoni
+rect(230,360,15,15,15);
+rect(215,310,15,15,15);
+rect(215,340,15,15,15);
+fill(255, 255, 255);
+ellipse(250,300,30,30);//bites
+ellipse(260,315,35,35);//bites
