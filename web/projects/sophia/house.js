@@ -1,5 +1,13 @@
 size(400,400);
 
+/* @pjs preload="https://www.kasandbox.org/third_party/javascript-khansrc/live-editor/build/images/avatars/leaf-green.png, 
+https://www.kasandbox.org/third_party/javascript-khansrc/live-editor/build/images/avatars/leaf-red.png,
+https://www.kasandbox.org/third_party/javascript-khansrc/live-editor/build/images/avatars/leaf-red.png, 
+https://www.kasandbox.org/third_party/javascript-khansrc/live-editor/build/images/avatars/leaf-orange.png,
+https://www.kasandbox.org/third_party/javascript-khansrc/live-editor/build/images/avatars/leaf-yellow.png,
+https://www.kasandbox.org/third_party/javascript-khansrc/live-editor/build/images/cute/GrassBlock.png,
+https://www.kasandbox.org/third_party/javascript-khansrc/live-editor/build/images/cute/TreeShort.png"; */
+
 function getImage(name) {
 	PImage img = loadImage("https://www.kasandbox.org/third_party/javascript-khansrc/live-editor/build/images/"+name+".png");
 	return img;
