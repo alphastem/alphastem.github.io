@@ -12,10 +12,14 @@ canvas {
   border-width: 3px;
   border-color:red;
   border-style: dashed;
+  margin-top: 12px;
+  margin-left:10px;
 }
 
 pre {
 	border-width: 3px;
 	border-color:blue;
 	border-style:dashed;
+	float: left;
+	width:400px;
 }
