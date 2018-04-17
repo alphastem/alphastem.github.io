@@ -3,22 +3,14 @@ size(400,400);
 //TODO: 
 //Sound
 //Scene
-var goal = 32;
+var goal = 48;
 var goalReachDisplay = 0;
 var msg = "";
 var gameOver = false;
 var COLORS = [
-    color(238, 228, 219),
-    color(238, 225, 202),
-    color(242, 178, 126),
-    color(244, 150, 105),
-    color(245, 124, 99),
-    color(244, 94, 67),
-    color(236, 205, 119),
-    color(236, 203, 107),
-    color(234, 192, 92),
-    color(235, 194, 78),
-    color(235, 191, 62)
+    color(107, 204, 253),
+    color(253, 105, 130)
+    
   ];
 
 var Tile = function(value) {
@@ -27,10 +19,20 @@ var Tile = function(value) {
 
 
 Tile.prototype.draw = function(row,col) {
-    var color = COLORS[Math.log2(this.value)-1];
-    fill(color);
+    var c;
+    if (this.value < 3 ) {
+        c = COLORS[this.value-1];
+    } else {
+        c = color(255, 255, 255);
+    }
+    
+    fill(c);
     rect(col*100+5, row*100+5, 90,90,10);
-    fill(255, 255, 255);
+    if (this.value < 3) {
+        fill(255, 255, 255);
+    } else {
+        fill(0, 0, 0);
+    }
     noStroke();
     textSize(40);
     textAlign(CENTER, CENTER);
@@ -47,7 +49,10 @@ var Grid = function() {
       ];
     var row = floor(random(0,4));
     var col = floor(random(0,4));
+    this.num1 = 0;
+    this.num2 = 0;
     this.tiles[row][col] = this.newTile();
+    
 };
 
 Grid.prototype.draw = function() {
@@ -181,18 +186,25 @@ Grid.prototype.packDown = function(col) {
 
 
 Grid.prototype.mergeLeft = function(row) {
-    
     for (var j = 1; j<4; j++) {
-        
-        if (this.tiles[row][j] !== null && this.tiles[row][j-1] !== null && this.tiles[row][j-1].value === this.tiles[row][j].value) {
-            this.tiles[row][j-1].value += this.tiles[row][j].value;
-            if (this.tiles[row][j-1].value === goal) {
-                msg = "You reached "+goal;
-                goalReachDisplay = 120;
-                goal = goal*2;
+        var t0 = this.tiles[row][j-1];
+        var t1 = this.tiles[row][j];
+        if (t1 !== null && t0 !== null ) {
+            if (t0.value + t1.value === 3) {
+                t0.value = 3;
+                this.tiles[row][j] = null;
+                this.packLeft(row);
+            } else if (t0.value > 2 && t1.value > 2 && t1.value === t0.value) {
+                t0.value = t0.value * 2;
+                if (t0.value === goal) {
+                    msg = "You reached "+goal;
+                    goalReachDisplay = 120;
+                    goal = goal*2;
+                }
+                this.tiles[row][j] = null;
+                this.packLeft(row);
             }
-            this.tiles[row][j] = null;
-            this.packLeft(row);
+
         }
     }    
 };
@@ -200,16 +212,24 @@ Grid.prototype.mergeLeft = function(row) {
 Grid.prototype.mergeUp = function(col) {
     //msg += "^"+col;
     for (var i = 1; i<4; i++) {
+        var t0 = this.tiles[i-1][col];
+        var t1 = this.tiles[i][col];
         
-        if (this.tiles[i][col] !== null && this.tiles[i-1][col] !== null && this.tiles[i-1][col].value === this.tiles[i][col].value) {
-            this.tiles[i-1][col].value += this.tiles[i][col].value;
-            if (this.tiles[i-1][col].value === goal) {
-                msg = "You reached "+goal;
-                goalReachDisplay = 120;
-                goal = goal*2;
-            }            
-            this.tiles[i][col] = null;
-            this.packUp(col);
+        if (t1 !== null && t0 !== null ) {
+            if (t0.value + t1.value === 3) {
+                t0.value = 3;
+                this.tiles[i][col] = null;
+                this.packUp(col);                
+            } else if (t0.value > 2 && t1.value > 2 && t1.value === t0.value) {
+                t0.value = t0.value * 2;
+                if (t0.value === goal) {
+                    msg = "You reached "+goal;
+                    goalReachDisplay = 120;
+                    goal = goal*2;
+                }
+                this.tiles[i][col] = null;
+                this.packUp(col);                   
+            }         
         }
     }    
 };
@@ -217,16 +237,24 @@ Grid.prototype.mergeUp = function(col) {
 Grid.prototype.mergeRight = function(row) {
     
     for (var j = 3; j>0; j--) {
+        var t0 = this.tiles[row][j-1];
+        var t1 = this.tiles[row][j];
         
-        if (this.tiles[row][j-1] !== null && this.tiles[row][j] !== null && this.tiles[row][j].value === this.tiles[row][j-1].value) {
-            this.tiles[row][j].value = 2 * this.tiles[row][j-1].value;
-            if (this.tiles[row][j].value === goal) {
-                msg = "You reached "+goal;
-                goalReachDisplay = 120;
-                goal = goal*2;
-            }               
-            this.tiles[row][j-1] = null;
-            this.packRight(row);
+        if (t1 !== null && t0 !== null ) {
+            if (t0.value + t1.value === 3) {
+                t1.value = 3;
+                this.tiles[row][j-1] = null;
+                this.packRight(row);                
+            } else if (t0.value > 2 && t1.value > 2 && t1.value === t0.value) {
+                t1.value = t1.value * 2;
+                if (t1.value === goal) {
+                    msg = "You reached "+goal;
+                    goalReachDisplay = 120;
+                    goal = goal*2;
+                }
+                this.tiles[row][j-1] = null;
+                this.packRight(row);                
+            }              
         }
         
     
@@ -237,16 +265,24 @@ Grid.prototype.mergeDown = function(col) {
     
     //msg +=  " col: "+ col.toString();
     for (var i = 3; i>0; i--) {
+        var t0 = this.tiles[i-1][col];
+        var t1 = this.tiles[i][col];
         
-        if (this.tiles[i][col] !== null && this.tiles[i-1][col] !== null && this.tiles[i-1][col].value === this.tiles[i][col].value) {
-            this.tiles[i][col].value += this.tiles[i-1][col].value;
-            if (this.tiles[i][col].value === goal) {
-                msg = "You reached "+goal;
-                goalReachDisplay = 120;
-                goal = goal*2;
+        if (t1 !== null && t0 !== null ) {
+            if (t0.value + t1.value === 3) {
+                t1.value = 3;
+                this.tiles[i-1][col] = null;
+                this.packDown(col);
+            } else if (t0.value > 2 && t1.value > 2 && t1.value === t0.value) {
+                t1.value = t1.value * 2;
+                if (t1.value === goal) {
+                    msg = "You reached "+goal;
+                    goalReachDisplay = 120;
+                    goal = goal*2;
+                }
+                this.tiles[i-1][col] = null;
+                this.packDown(col);
             } 
-            this.tiles[i-1][col] = null;
-            this.packDown(col);
         }
         
     }    
@@ -256,7 +292,10 @@ Grid.prototype.mergeDown = function(col) {
 Grid.prototype.canMergeRows = function(){
     for (var row = 0;row<4;row++) {
         for (var j = 1; j<4; j++) {
-            if (this.tiles[row][j-1] !== null && this.tiles[row][j] !== null && this.tiles[row][j-1].value === this.tiles[row][j].value) {
+            var t0 = this.tiles[row][j-1];
+            var t1 = this.tiles[row][j];
+            
+            if (t0 !== null && t1 !== null && (t0.value + t1.value === 3 || (t0.value + t1.value > 5 && t0.value === t1.value))) {
                 return true;
             }
         }
@@ -267,7 +306,9 @@ Grid.prototype.canMergeRows = function(){
 Grid.prototype.canMergeCols = function(){
     for (var col = 0;col<4;col++) {
         for (var i = 1; i<4; i++) {
-            if (this.tiles[i-1][col] !== null && this.tiles[i][col] !== null && this.tiles[i-1][col].value === this.tiles[i][col].value) {
+            var t0 = this.tiles[i-1][col];
+            var t1 = this.tiles[i][col];            
+           if (t0 !== null && t1 !== null && (t0.value + t1.value === 3 || (t0.value + t1.value > 5 && t0.value === t1.value))) {
                 return true;
             }
         }
@@ -325,12 +366,25 @@ Grid.prototype.moveDown = function() {
 
 // Get a new tile
 Grid.prototype.newTile = function() {
-    // 90% 2, 10% 4
-    var ram = random(0,10);
-    var value = 2;
-    if (ram > 9) {
-        value = 4;
-    } 
+    // 50% 2, 50% 1
+    var value;
+    // Keep the ballence 
+    if (this.num2 - this.num1 > 1) {
+        value = 1;
+        this.num1++;
+    } else if (this.num1 - this.num2 > 1) {
+        value = 2;
+        this.num2++;
+    } else {
+        var ram = random(0,10);
+        if (ram >= 5) {
+            value = 2;
+            this.num2++;
+        }  else {
+            value = 1;
+            this.num1++;
+        }
+    }
     return new Tile(value);
 };
 
@@ -476,29 +530,32 @@ mouseReleased = function() {
     if (gameOver && gameoverScreen.newGame()) {
         gameOver = false;
         grid = new Grid();
-        goal = 32;
+        goal = 48;
         return;
     }
 
-    if (mouseY < 400 - mouseX  && mouseY < mouseX && mouseY < 150) {
-        //up
-        grid.moveUp();
-        grid.fillBottom();
-    } else if (mouseY > 400 - mouseX  && mouseY < mouseX && mouseX > 250) {
-        //right
-        grid.moveRight();
-        grid.fillLeft();
-    } else if (mouseY > 400 - mouseX  && mouseY > mouseX && mouseY > 250) {
-        //down
-        grid.moveDown();
-        grid.fillTop();
-    } else if (mouseY < 400 - mouseX  && mouseY > mouseX && mouseX < 150) {
-        //left
-        grid.moveLeft();
-        grid.fillRight();
-    }  
+//     if (mouseY < 400 - mouseX  && mouseY < mouseX && mouseY < 150) {
+//         //up
+//         grid.moveUp();
+//         grid.fillBottom();
+//     } else if (mouseY > 400 - mouseX  && mouseY < mouseX && mouseX > 250) {
+//         //right
+//         grid.moveRight();
+//         grid.fillLeft();
+//     } else if (mouseY > 400 - mouseX  && mouseY > mouseX && mouseY > 250) {
+//         //down
+//         grid.moveDown();
+//         grid.fillTop();
+//     } else if (mouseY < 400 - mouseX  && mouseY > mouseX && mouseX < 150) {
+//         //left
+//         grid.moveLeft();
+//         grid.fillRight();
+//     }  
     
 };
+
+
+  
 
 
   
