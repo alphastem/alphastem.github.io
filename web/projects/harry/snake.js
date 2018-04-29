@@ -1,4 +1,6 @@
-size(400,400);
+size(800,600);
+var H = 60;
+var W = 80;
 var msg = "";
 var gameover = false;
 
@@ -23,9 +25,9 @@ var Grid = function() {
     this.tiles = [];
     var row;
     var t;
-    for (var i = 0;i<40;i++) {
+    for (var i = 0;i<H;i++) {
         row = [];
-        for (var j=0; j<40;j++) { 
+        for (var j=0; j<W;j++) { 
             t = new Tile();
             row.push(t);
         }
@@ -35,14 +37,14 @@ var Grid = function() {
 };
 
 Grid.prototype.newApple = function() {
-    var row = floor(random(0,40));
-    var col = floor(random(0,40));
+    var row = floor(random(0,H));
+    var col = floor(random(0,W));
     this.tiles[row][col].apple =true;
 };
 
 Grid.prototype.eatApple = function(row,col) {
     // msg+="{"+row+","+col+"}";
-    if (row<0||row>=40||col<0||col>=40) {
+    if (row<0||row>=H||col<0||col>=W) {
             return false;
     }
 
@@ -58,8 +60,8 @@ Grid.prototype.eatApple = function(row,col) {
 };
 
 Grid.prototype.draw = function() {
-    for (var i = 0;i<40;i++) {
-        for (var j=0; j<40;j++) {
+    for (var i = 0;i<H;i++) {
+        for (var j=0; j<W;j++) {
             this.tiles[i][j].draw(i,j);
            
         }
@@ -97,7 +99,7 @@ Snake.prototype.isOver = function() {
     // msg = "";
     for (var i = 0 ; i<this.tiles.length;i++) {
         var t = this.tiles[i];
-        if (t[0] < 0 || t[0] >= 40 || t[1]<0 ||t[1]>=40) {
+        if (t[0] < 0 || t[0] >= H || t[1]<0 ||t[1]>=W) {
             //msg+="gameover";
             return true;
         }
@@ -229,7 +231,7 @@ var GameOverScreen =  function() {
 
 GameOverScreen.prototype.draw = function() {
     fill(200, 200, 200, 100);
-    rect(0,0,400,400);
+    rect(0,0,800,800);
     
     fill(0, 255, 0);
     textAlign(CENTER,CENTER);
@@ -268,11 +270,11 @@ draw = function() {
         //msg="Game Over";
     }  else {
 
-        if (timer === 60) {
+        if (timer === 200) {
             timer = 0;
             //msg = "";
         }
-        if (timer % 30 === 0) {
+        if (timer % 200 === 0) {
             grid.newApple();
         }
     
