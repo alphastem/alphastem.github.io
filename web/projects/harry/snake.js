@@ -12,6 +12,7 @@ var Tile = function() {
 Tile.prototype.draw = function(row,col) {
     
     fill(255, 255, 255);
+    noStroke();
     rect(col*10,row*10,10,10);
     
     if (this.apple) {
