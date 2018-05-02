@@ -232,22 +232,22 @@ var GameOverScreen =  function() {
 
 GameOverScreen.prototype.draw = function() {
     fill(200, 200, 200, 100);
-    rect(0,0,800,800);
+    rect(0,0,800,600);
     
     fill(0, 255, 0);
     textAlign(CENTER,CENTER);
     textSize(40);
-    text("Game Over!", 10,10,380,330);
+    text("Game Over!", 210,110,380,330);
     fill(142,122,103,255);
-    rect(100,300,200,50,10);
+    rect(300,400,200,50,10);
     fill(255, 255, 255);
     textSize(20);
-    text("New Game",100,270,200,100);
+    text("New Game",300,370,200,100);
 
 };
 
 GameOverScreen.prototype.newGame = function() {
-    return mouseX > 100 && mouseX <300 && mouseY > 270 && mouseY < 370;
+    return mouseX > 300 && mouseX <500 && mouseY > 400 && mouseY < 450;
 };
 
 
