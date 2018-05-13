@@ -17,7 +17,7 @@ Tile.prototype.draw = function(row,col) {
     
     if (this.apple) {
         fill(26, 219, 20);
-        ellipse(col*10+5,row*10+5,6,6);        
+        ellipse(col*10+5,row*10+5,10,10);        
     }
 };
 
