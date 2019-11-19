@@ -1,4 +1,24 @@
-var message ="";		
+var message ="";
+  
+function startTimer() {
+   	var duration = 60 * 5;
+    // var display = document.getElementById('time');	
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10)
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        document.getElementById('time').textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            timer = duration;
+        }
+    }, 1000);
+}
+
 var reduce = function(numbers, exps) {
 
 	//message += "<br/><br/>reduce: {["+numbers.join(",")+"] ["+exps.join(",")+"]}";
@@ -168,3 +188,19 @@ var solveIt = function() {
 
     document.getElementById("message").innerHTML = message;
 };
+
+var next = function() {
+	var n1 = Math.floor(Math.random() * 10 +1);
+	var n2 = Math.floor(Math.random() * 10 +1);
+	var n3 = Math.floor(Math.random() * 10 +1);
+	var n4 = Math.floor(Math.random() * 10 +1);
+
+	document.getElementById("n1").value = n1;
+	document.getElementById("n2").value = n2;
+	document.getElementById("n3").value = n3;
+	document.getElementById("n4").value = n4;
+
+	startTimer();
+
+
+}
